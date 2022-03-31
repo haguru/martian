@@ -69,7 +69,7 @@ func (db *RedisDB) Get(prefix string, key string) (interface{}, error) {
 		return nil, errors.New("no prefix given")
 	}
 
-	reply, err := redis.String(connection.Do("GET", prefix+key))
+	reply, err := connection.Do("GET", prefix+key)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ func (db *RedisDB) SetScore(prefix string, key string, score int) error {
 		return errors.New("no prefix given")
 	}
 
-	_, err := connection.Do("ZADD", "score", prefix+key)
+	_, err := connection.Do("ZADD", "score", score, prefix+key)
 
 	return err
 }

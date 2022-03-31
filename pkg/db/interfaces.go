@@ -3,7 +3,7 @@ package db
 import "github.com/gomodule/redigo/redis"
 
 type RedisClientInterface interface {
-	Close() redis.Conn
+	Close() error
 	GetConnection() redis.Conn
 	TestConnection() (redis.Conn, error)
 }
