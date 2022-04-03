@@ -3,6 +3,7 @@ package config
 import (
 	"errors"
 	"reflect"
+	"time"
 
 	"github.com/haguru/martian/pkg/db"
 	"github.com/hashicorp/vault/api"
@@ -12,14 +13,21 @@ type App struct {
 	config ServiceConfig
 }
 
+
 type ServiceConfig struct {
-	ValutConfig api.Config
+	Vault VaultConfig
 	RedisConfig db.Configuration
+}
+
+
+type VaultConfig struct {
+	ApiConfig  api.Config
+	HttpTimeout time.Duration
 }
 
 // double check this linting: avoid using reflect.DeepEqual with errorsdeepequalerrors
 func (appConfig *App) Validate() error {
-	if reflect.DeepEqual(appConfig.config.ValutConfig, api.Config{}) {
+	if reflect.DeepEqual(appConfig.config.Vault, api.Config{}) {
 		return errors.New("vault configuration hase not been set")
 	}
 
