@@ -4,4 +4,10 @@
     Token = "path/to/token_file"
     Host = "localhost"
     Port = 8200
+    [APP.RedisConfig]
+    Host = "localhost"
+	Port = 5966    
+	BatchSize = 1000
+	Timeout  =  30000000000  # this is in millisec
+	Password = ""  #this is to be placed in vault
     
