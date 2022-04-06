@@ -1,2 +1,7 @@
+
+Vault
 docker run -d --rm --name vault-server -p 8200:8200 -p 9445:9445 --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=martian-token' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
 export VAULT_ADDR='http://172.17.0.3:8200'
+
+Cassandra
+docker run -p 8201:8201 --name some-cassandra  -d cassandra:latest
