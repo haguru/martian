@@ -12,4 +12,6 @@
 	BatchSize = 1000
 	Timeout  =  30000000000  # this is in millisec
 	Password = ""  #this is to be placed in vault
+    [APP.Mongo]
+    Host = "localhost"
     
