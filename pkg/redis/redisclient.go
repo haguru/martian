@@ -25,7 +25,7 @@ type RedisClient struct {
 	BatchSize int
 }
 
-func NewClient(config Configuration) (*RedisClient, error) {
+func NewRedisClient(config Configuration) (*RedisClient, error) {
 	var currClient *RedisClient
 	once.Do(func() {
 		connectionString := fmt.Sprintf("%s:%d", config.Host, config.Port)

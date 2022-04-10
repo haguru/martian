@@ -1,2 +1,4 @@
 docker run -d --rm --name vault-server -p 8200:8200 -p 9445:9445 --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=martian-token' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
 export VAULT_ADDR='http://172.17.0.3:8200'
+
+docker run --rm  -p 6379:6379 -p 5966:5966  --name some-redis -d redis

@@ -1,8 +1,6 @@
 package models
 
-
 type Organization struct {
-	Name string
+	Name    string
 	Domains []Domain
-	
 }
