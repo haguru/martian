@@ -264,7 +264,7 @@ func TestRedisDB_Get(t *testing.T) {
 				key:    "myKey",
 			},
 			doReturnErr: nil,
-			want:        nil,
+			want:        "",
 			wantErr:     true,
 		},
 		{
@@ -278,7 +278,7 @@ func TestRedisDB_Get(t *testing.T) {
 				key:    "myKey",
 			},
 			doReturnErr: fmt.Errorf("fail"),
-			want:        nil,
+			want:        "",
 			wantErr:     true,
 		},
 	}
@@ -646,12 +646,12 @@ func TestRedisDB_SetScore(t *testing.T) {
 		score  int
 	}
 	tests := []struct {
-		name    string
-		conn    *mocks.Conn
-		fields  fields
-		args    args
+		name        string
+		conn        *mocks.Conn
+		fields      fields
+		args        args
 		doreturnErr error
-		wantErr bool
+		wantErr     bool
 	}{
 		{
 			name: "Successfull score set",
@@ -661,11 +661,11 @@ func TestRedisDB_SetScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "test:",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: nil,
-			wantErr: false,
+			wantErr:     false,
 		},
 		{
 			name: "Conn Do returns error",
@@ -675,11 +675,11 @@ func TestRedisDB_SetScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "test:",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: fmt.Errorf("failed"),
-			wantErr: true,
+			wantErr:     true,
 		},
 		{
 			name: "no prefix given",
@@ -689,11 +689,11 @@ func TestRedisDB_SetScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: nil,
-			wantErr: true,
+			wantErr:     true,
 		},
 	}
 	for _, tt := range tests {
@@ -721,12 +721,12 @@ func TestRedisDB_UpdateScore(t *testing.T) {
 		score  int
 	}
 	tests := []struct {
-		name    string
-		conn    *mocks.Conn
-		fields  fields
-		args    args
+		name        string
+		conn        *mocks.Conn
+		fields      fields
+		args        args
 		doreturnErr error
-		wantErr bool
+		wantErr     bool
 	}{
 		{
 			name: "Successfull score set",
@@ -736,11 +736,11 @@ func TestRedisDB_UpdateScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "test:",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: nil,
-			wantErr: false,
+			wantErr:     false,
 		},
 		{
 			name: "Conn Do returns error",
@@ -750,11 +750,11 @@ func TestRedisDB_UpdateScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "test:",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: fmt.Errorf("failed"),
-			wantErr: true,
+			wantErr:     true,
 		},
 		{
 			name: "no prefix given",
@@ -764,11 +764,11 @@ func TestRedisDB_UpdateScore(t *testing.T) {
 			},
 			args: args{
 				prefix: "",
-				key: "hadoken",
-				score: 0,
+				key:    "hadoken",
+				score:  0,
 			},
 			doreturnErr: nil,
-			wantErr: true,
+			wantErr:     true,
 		},
 	}
 	for _, tt := range tests {

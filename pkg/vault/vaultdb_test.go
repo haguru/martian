@@ -1,4 +1,4 @@
-package db
+package vault
 
 import (
 	"fmt"

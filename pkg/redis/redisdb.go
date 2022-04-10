@@ -36,7 +36,7 @@ func (db *RedisDB) Set(prefix string, key string, value string) error {
 		return errors.New("no prefix given")
 	}
 
-	_, err := connection.Do("SET", prefix+key, value)
+	_, err := connection.Do("SET", prefix+":"+key, value)
 
 	return err
 }
@@ -52,26 +52,26 @@ func (db *RedisDB) HashSet(prefix string, key string, valueMap map[string]interf
 	}
 
 	_ = connection.Send("MULTI")
-	_ = connection.Send("HSET", redis.Args{prefix + key}.AddFlat(valueMap)...)
+	_ = connection.Send("HSET", redis.Args{prefix+":"+key}.AddFlat(valueMap)...)
 	_, err := connection.Do("EXEC")
 
 	return err
 
 }
 
-func (db *RedisDB) Get(prefix string, key string) (interface{}, error) {
+func (db *RedisDB) Get(prefix string, key string) (string, error) {
 	connection := db.client.GetConnection()
 	defer func() {
 		_ = connection.Close()
 	}()
 
 	if prefix == "" {
-		return nil, errors.New("no prefix given")
+		return "", errors.New("no prefix given")
 	}
 
-	reply, err := connection.Do("GET", prefix+key)
+	reply, err := redis.String(connection.Do("GET", prefix+":"+key))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	return reply, nil
@@ -88,7 +88,7 @@ func (db *RedisDB) GetHashSet(prefix string, key string) ([]interface{}, error) 
 		return nil, errors.New("no prefix given")
 	}
 
-	reply, err := redis.Values(connection.Do("HGETALL", prefix+key))
+	reply, err := redis.Values(connection.Do("HGETALL", prefix+":"+key))
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ func (db *RedisDB) Exist(prefix string, key string) (bool, error) {
 		return false, errors.New("no prefix given")
 	}
 
-	reply, err := redis.Bool(connection.Do("EXISTS", prefix+key))
+	reply, err := redis.Bool(connection.Do("EXISTS", prefix+":"+key))
 	if err != nil {
 		return false, err
 	}
@@ -125,7 +125,7 @@ func (db *RedisDB) Delete(prefix string, key string) error {
 		return errors.New("no prefix given")
 	}
 
-	_, err := connection.Do("DEL", prefix+key)
+	_, err := connection.Do("DEL", prefix+":"+key)
 
 	return err
 }
@@ -154,7 +154,7 @@ func (db *RedisDB) SetScore(prefix string, key string, score int) error {
 		return errors.New("no prefix given")
 	}
 
-	_, err := connection.Do("ZADD", "score", score, prefix+key)
+	_, err := connection.Do("ZADD", "score", score, prefix+":"+key)
 
 	return err
 }

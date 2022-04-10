@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/gomodule/redigo v1.8.8
 	github.com/hashicorp/vault/api v1.5.0
+	github.com/pelletier/go-toml v1.9.4
 	github.com/stretchr/testify v1.7.1
 )
 

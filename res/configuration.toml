@@ -1,17 +1,16 @@
-[APP]
-
-    [APP.Vault]
-    HttpTimeout = 10
-        [APP.Vault.ApiConfig]
-        Token = "path/to/token_file"
-        Host = "localhost"
-        Port = 8200
-    [APP.RedisConfig]
+[Config]
+ServiceName = "NewService"
+    [Config.Vault]
+    HttpTimeout = "10s"
+    TokenFile = "./res/vaultToken"
     Host = "localhost"
-	Port = 5966    
+    Port = 8200
+    [Config.RedisConfig]
+    Host = "localhost"
+	Port = 6379    
 	BatchSize = 1000
 	Timeout  =  30000000000  # this is in millisec
 	Password = ""  #this is to be placed in vault
-    [APP.Mongo]
+    [Config.Mongo]
     Host = "localhost"
     

@@ -11,7 +11,7 @@ type RedisClientInterface interface {
 type DBInterface interface {
 	Set(prefix string, key string, value string) error
 	HashSet(prefix string, key string, valueMap map[string]interface{}) error
-	Get(prefix string, key string) (interface{}, error)
+	Get(prefix string, key string) (string, error)
 	GetHashSet(prefix string, key string) ([]interface{}, error)
 	Exist(prefix string, key string) (bool, error)
 	Delete(prefix string, key string) error
