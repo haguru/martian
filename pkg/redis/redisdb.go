@@ -10,7 +10,7 @@ type RedisDB struct {
 	client RedisClientInterface
 }
 
-func NewRedisDB(client RedisClientInterface) (DBInterface, error) {
+func NewRedisDB(client RedisClientInterface) (RedisInterface, error) {
 	db := &RedisDB{
 		client: client,
 	}

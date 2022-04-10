@@ -6,26 +6,19 @@ import (
 	"time"
 
 	"github.com/gomodule/redigo/redis"
+	"github.com/haguru/martian/config"
 )
 
 var (
 	once sync.Once
 )
 
-type Configuration struct {
-	Host      string
-	Port      int
-	BatchSize int
-	Timeout   time.Duration
-	Password  string //consider using vault of osme type of secure way to get it maybe create an interface for this ATM
-}
-
 type RedisClient struct {
 	Pool      *redis.Pool
 	BatchSize int
 }
 
-func NewRedisClient(config Configuration) (*RedisClient, error) {
+func NewRedisClient(config config.RedisConfiguration) (*RedisClient, error) {
 	var currClient *RedisClient
 	once.Do(func() {
 		connectionString := fmt.Sprintf("%s:%d", config.Host, config.Port)

@@ -8,7 +8,7 @@ type RedisClientInterface interface {
 	TestConnection() (redis.Conn, error)
 }
 
-type DBInterface interface {
+type RedisInterface interface {
 	Set(prefix string, key string, value string) error
 	HashSet(prefix string, key string, valueMap map[string]interface{}) error
 	Get(prefix string, key string) (string, error)

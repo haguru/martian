@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/haguru/martian/config"
 	"github.com/haguru/martian/mocks"
 	"github.com/stretchr/testify/mock"
 )
@@ -12,16 +13,16 @@ import (
 func TestNewRedisDB(t *testing.T) {
 	tests := []struct {
 		name                    string
-		config                  Configuration
+		config                  config.RedisConfiguration
 		closeReturn             error
 		client                  *mocks.RedisClientInterface
 		testConnectionReturnErr error
-		want                    DBInterface
+		want                    RedisInterface
 		wantErr                 bool
 	}{
 		{
 			name:                    "Success client created",
-			config:                  Configuration{},
+			config:                  config.RedisConfiguration{},
 			client:                  &mocks.RedisClientInterface{},
 			closeReturn:             nil,
 			testConnectionReturnErr: nil,
@@ -30,7 +31,7 @@ func TestNewRedisDB(t *testing.T) {
 		},
 		{
 			name:                    "close client failed",
-			config:                  Configuration{},
+			config:                  config.RedisConfiguration{},
 			client:                  &mocks.RedisClientInterface{},
 			closeReturn:             fmt.Errorf("failed"),
 			testConnectionReturnErr: nil,
@@ -39,7 +40,7 @@ func TestNewRedisDB(t *testing.T) {
 		},
 		{
 			name:                    "connection client failed",
-			config:                  Configuration{},
+			config:                  config.RedisConfiguration{},
 			client:                  &mocks.RedisClientInterface{},
 			closeReturn:             nil,
 			testConnectionReturnErr: fmt.Errorf("failed"),

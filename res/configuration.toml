@@ -13,4 +13,5 @@ ServiceName = "NewService"
 	Password = ""  #this is to be placed in vault
     [Config.Mongo]
     Host = "localhost"
+    Port = 27017
     
